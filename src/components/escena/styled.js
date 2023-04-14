@@ -6,4 +6,5 @@ export const Frase = styled.div`
     margin: 10px;
     border-radius: 25px;
     text-align: center;
-`;
+    background-color: ${props => props.deseada ? '#f3a2a2' : 'white'};
+    `;

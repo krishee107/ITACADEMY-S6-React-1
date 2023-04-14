@@ -1,15 +1,9 @@
 import { Frase } from "./styled";
 
 const Escena = (props) => {
-    const frases = props.frase;
-    const listaFrases = frases.map((frase, index) =>
-        <Frase key={index}> {frase} </Frase>
-    );
-    return (
-        <>
-            {listaFrases}
-        </>
-    );
-}
+    const frase = props.frase;
+    const deseada = props.deseada;
 
+    return <Frase deseada={deseada}> {frase}</Frase>
+}
 export default Escena;

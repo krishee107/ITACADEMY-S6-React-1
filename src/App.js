@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import './App.css';
 import Escena from './components/escena/Escena';
+import { Button } from './styled';
 
 function App() {
 
@@ -10,9 +12,29 @@ function App() {
     "Mentrestant, altres herois no van tenir tanta sort en la seva elecció …"
   ];
 
+  const [deseada, setDeseada] = useState(0)
+  const moverFrase = (num) => {
+    console.log(deseada)
+    if (deseada + num < 0)
+      return setDeseada(frases.length - 1)
+    else if (deseada + num > frases.length - 1)
+      return setDeseada(0)
+    else
+      return setDeseada(deseada + num)
+  }
+
   return (
     <>
-      <Escena frase={frases} />
+      <div>
+        <Button onClick={() => moverFrase(-1)}>Anterior</Button>
+        <Button onClick={() => moverFrase(1)}>Següent</Button>
+      </div>
+      {frases.map((f, index) => {
+        if (deseada == index)
+          return <Escena key={index} frase={f} deseada={true} />
+        else
+          return <Escena key={index} frase={f} deseada={false} />
+      })}
     </>
   );
 }

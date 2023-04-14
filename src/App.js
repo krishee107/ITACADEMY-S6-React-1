@@ -14,7 +14,6 @@ function App() {
 
   const [deseada, setDeseada] = useState(0)
   const moverFrase = (num) => {
-    console.log(deseada)
     if (deseada + num < 0)
       return setDeseada(frases.length - 1)
     else if (deseada + num > frases.length - 1)
@@ -23,18 +22,39 @@ function App() {
       return setDeseada(deseada + num)
   }
 
+  const [bienvenida, setBienvenida] = useState(true)
+  const modificarBienvenida = () => {
+    setBienvenida(false)
+  }
+
   return (
     <>
-      <div>
-        <Button onClick={() => moverFrase(-1)}>Anterior</Button>
-        <Button onClick={() => moverFrase(1)}>Següent</Button>
-      </div>
-      {frases.map((f, index) => {
-        if (deseada == index)
-          return <Escena key={index} frase={f} deseada={true} />
-        else
-          return <Escena key={index} frase={f} deseada={false} />
-      })}
+      {
+        bienvenida ?
+
+          // Se cumple la bienvenida
+          <div>
+            <h1>Benvingut!</h1>
+            <p>Descripció: Aquest és el meu primer projecte amb React :D</p>
+            <Button onClick={() => modificarBienvenida()}>Començar</Button>
+          </div > :
+
+          //No se cumple la bienvenida
+          <div>
+            <div>
+              <Button onClick={() => moverFrase(-1)}>Anterior</Button>
+              <Button onClick={() => moverFrase(1)}>Següent</Button>
+            </div>
+            {frases.map((f, index) => {
+              if (deseada == index)
+                return <Escena key={index} frase={f} deseada={true} />
+              else
+                return <Escena key={index} frase={f} deseada={false} />
+            })}
+          </div>
+
+      }
+
     </>
   );
 }
